@@ -21,7 +21,6 @@ export const authOptions: NextAuthOptions = {
                             Accept: "application/json",
                         },
                     });
-                    console.log(response.data);
 
                     const user = response.data?.users;
 
