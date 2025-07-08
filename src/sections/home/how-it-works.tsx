@@ -1,81 +1,70 @@
-"use client"
+import React from 'react'
+import Path from "@/assets/images/how-it-works-path.png"
+import Check from "@/assets/images/check-hiw.png"
+import Payment from "@/assets/images/payment-hiw.png"
+import Key from "@/assets/images/key-hiw.png"
+import Monitor from "@/assets/images/monitor-hiw.png"
+import Integrate from "@/assets/images/integrate-hiw.png"
+import Question from "@/assets/images/question-rounded.png"
+import Image from 'next/image'
 
-import { useEffect, useState } from "react"
-import { CheckCircle, KeyRound, DollarSign, Settings, ShieldCheck, HelpCircle } from "lucide-react"
+export default function HowItWorks() {
+    return (
+        <>
+            <section className='py-20'>
 
-const steps = [
-  {
-    title: "Choose a Plan",
-    icon: <CheckCircle size={20} />,
-    description: "Pick a pricing plan (Basic, Pro, or Enterprise)",
-  },
-  {
-    title: "Access Your API Key",
-    icon: <KeyRound size={20} />,
-    description: "Get your unique API key and save it for integration",
-  },
-  {
-    title: "Make a Payment",
-    icon: <DollarSign size={20} />,
-    description: "Complete your payment to activate the service",
-  },
-  {
-    title: "Integrate the API",
-    icon: <Settings size={20} />,
-    description: "Follow the docs to integrate image, ID, or voice checks",
-  },
-  {
-    title: "Monitor & Secure",
-    icon: <ShieldCheck size={20} />,
-    description: "Track usage and block threats in your dashboard",
-  },
-]
+            </section>
+            <section className='container relative'>
+                <div className='absolute z-10 left-[6%] -top-14'>
+                    <div className="flex gap-3 items-center py-3 px-5 rounded-[40px] bg-gradient-to-r from-[#A626FF] via-[#8C24FB] to-[#7322F8] w-fit">
+                        <Image src={Check} alt='' />
+                        <span className='font-bold text-lg md:text-xl'>Choose a Plan</span>
+                    </div>
+                    <p className='text-center text-sm md:text-base'>Pick a pricing plan<br />
+                        (Basic, Pro, or Enterprise)
+                    </p>
+                </div>
+                <div className='absolute -bottom-28 left-[28%] z-10'>
+                    <div className="flex gap-3 items-center py-3 px-5 rounded-[40px] bg-gradient-to-r from-[#A626FF] via-[#8C24FB] to-[#7322F8] w-fit">
+                        <Image src={Payment} alt='' />
+                        <span className='font-bold text-lg md:text-xl'>Make a Payment</span>
+                    </div>
+                    <p className='text-center text-sm md:text-base'>Complete your payment <br />to activate the service.
+                    </p>
+                </div>
+                <div className='absolute -top-20 left-[40%] z-10'>
+                    <div className="flex gap-3 items-center py-3 px-5 rounded-[40px] bg-gradient-to-r from-[#A626FF] via-[#8C24FB] to-[#7322F8] w-fit">
+                        <Image src={Key} alt='' />
+                        <span className='font-bold text-lg md:text-xl'>Access Your API Key</span>
+                    </div>
+                    <p className='text-center text-sm md:text-base'>Get your unique API key and <br/>save it for integration
+                    </p>
+                </div>
+                <div className='absolute -bottom-12 right-[20%] z-10'>
+                    <div className="flex gap-3 items-center py-3 px-5 rounded-[40px] bg-gradient-to-r from-[#A626FF] via-[#8C24FB] to-[#7322F8] w-fit">
+                        <Image src={Integrate} alt='' />
+                        <span className='font-bold text-lg md:text-xl'>Integrate the API</span>
+                    </div>
+                    <p className='text-center text-sm md:text-base'>Pick a pricing plan<br />
+                       Follow the docs to integrate <br/> image, ID, or voice checks
+                    </p>
+                </div>
+                <div className='absolute -top-30 right-0  z-10'>
+                    <div className="flex gap-3 items-center py-3 px-5 rounded-[40px] bg-gradient-to-r from-[#A626FF] via-[#8C24FB] to-[#7322F8] w-fit">
+                        <Image src={Monitor} alt='' />
+                        <span className='font-bold text-lg md:text-xl'>Monitor & Secure</span>
+                    </div>
+                    <p className='text-center text-sm md:text-base'>Track usage and block <br/> threats in your dashboard
+                    </p>
+                </div>
 
-export default function HowItWorksTimeline() {
-  return (
-    <section className="relative py-20 px-6 bg-[#0C002C] text-white overflow-hidden">
-      {/* Title */}
-      <div className="flex items-center gap-2 mb-12">
-        <div className="bg-purple-600 text-white rounded-full p-2">
-          <HelpCircle size={20} />
-        </div>
-        <h2 className="text-3xl font-bold">How It Works?</h2>
-      </div>
+                <Image src={Path} alt='' className='' />
 
-      {/* Timeline */}
-      <div className="relative z-10 flex flex-col md:flex-row items-center justify-between gap-10 max-w-6xl mx-auto">
-        {steps.map((step, index) => (
-          <div
-            key={index}
-            className="bg-[#200652] border border-purple-500/40 rounded-xl p-4 w-full md:w-[180px] text-center shadow-xl relative"
-          >
-            <div className="flex justify-center items-center mb-2 text-purple-400">
-              {step.icon}
-            </div>
-            <h3 className="font-semibold text-lg mb-1">{step.title}</h3>
-            <p className="text-sm text-gray-300">{step.description}</p>
+            </section>
+            <section className='py-20'>
 
-            {/* Glowing Dot */}
-            <div className="absolute -bottom-4 left-1/2 transform -translate-x-1/2 w-3 h-3 bg-purple-500 rounded-full shadow-[0_0_12px_4px_rgba(168,85,247,0.6)]" />
-          </div>
-        ))}
-      </div>
+            </section>
+        </>
 
-      {/* SVG Curved Path */}
-      <svg className="absolute top-48 left-0 w-full h-40 z-0 pointer-events-none hidden md:block" viewBox="0 0 1000 200" fill="none">
-        <path
-          d="M0 100 C 200 0, 400 200, 600 100 C 800 0, 1000 200, 1200 100"
-          stroke="url(#gradient)"
-          strokeWidth="2"
-          fill="none"
-        />
-        <defs>
-          <linearGradient id="gradient" x1="0" x2="1000" y1="0" y2="0" gradientUnits="userSpaceOnUse">
-            <stop stopColor="#A855F7" />
-            <stop offset="1" stopColor="#9333EA" />
-          </linearGradient>
-        </defs>
-      </svg>
-    </section>
-  )
+    )
 }

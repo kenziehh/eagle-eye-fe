@@ -8,7 +8,7 @@ export default function Navbar() {
     return (
         <nav className='container flex items-center justify-between py-9 '>
             <Image src={"/images/logo-nav.png"} alt='' width={180} height={60} />
-            <div className='flex items-center gap-12'>
+            <div className='hidden lg:flex items-center gap-12'>
                 <Link href={"/"} className=''>About Us</Link>
                 <Link href={"/"} className=''>How It Works</Link>
                 <Link href={"/"} className=''>Pricing</Link>
