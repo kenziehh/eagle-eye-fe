@@ -6,8 +6,6 @@
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
   --color-sidebar-ring: var(--sidebar-ring);
   --color-sidebar-border: var(--sidebar-border);
   --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
@@ -41,6 +39,39 @@
   --radius-md: calc(var(--radius) - 2px);
   --radius-lg: var(--radius);
   --radius-xl: calc(var(--radius) + 4px);
+
+  /* === Base === */
+  --color-base-white: #ffffff;
+  --color-base-black: #383838;
+  --color-base-background: #251F4E;
+
+  /* === Gradient (gunakan di bg-gradient) */
+  --color-gradient-start: #A626FF;
+  --color-gradient-mid: #8C24FB;
+  --color-gradient-end: #7322F8;
+
+  /* === Neutral === */
+  --color-neutral-light: #F4F4F4;
+  --color-neutral-light-hover: #EFEFEF;
+  --color-neutral-light-active: #DDDDDD;
+  --color-neutral-normal: #929292;
+  --color-neutral-normal-hover: #838383;
+  --color-neutral-normal-active: #757575;
+  --color-neutral-dark: #6E6E6E;
+  --color-neutral-dark-active: #585858;
+  --color-neutral-darker: #333333;
+
+  /* === Primary === */
+  --color-primary-light: #F4E9FF;
+  --color-primary-light-hover: #EDEDFE;
+  --color-primary-light-active: #D8BBFE;
+  --color-primary: #8C24FB;
+  --color-primary-hover: #7E20E2;
+  --color-primary-active: #701DC9;
+  --color-primary-dark: #691BBC;
+  --color-primary-dark-active: #541697;
+  --color-primary-darker: #3F1071;
+
 }
 
 :root {
@@ -116,7 +147,37 @@
   * {
     @apply border-border outline-ring/50;
   }
+
   body {
     @apply bg-background text-foreground;
+    font-family: 'DM Sans', sans-serif;
+
   }
+}
+
+@layer utilities {
+  .text-h1 {
+    @apply text-[30px] leading-[36px];
+  }
+
+  .text-h2 {
+    @apply text-[23px] leading-[32px];
+  }
+
+  .text-h3 {
+    @apply text-[18px] leading-[25px];
+  }
+
+  .text-h4 {
+    @apply text-[15px] leading-[21px];
+  }
+
+  .text-h5 {
+    @apply text-[14px] leading-[20px];
+  }
+
+  .text-h6 {
+    @apply text-[12px] leading-[17px];
+  }
+
 }
