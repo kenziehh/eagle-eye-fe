@@ -5,6 +5,7 @@ import React, { useState } from 'react'
 import { LogOut, Menu, X } from 'lucide-react'
 import { Button } from '../ui/button'
 import { Link as ScrollLink } from 'react-scroll'
+import Link from 'next/link'
 
 export default function Navbar() {
     const [isOpen, setIsOpen] = useState(false)
@@ -58,12 +59,12 @@ export default function Navbar() {
                     </ScrollLink>
                 ))}
             </div>
-
-            <Button variant="outline" className="hidden lg:flex">
-                Login
-                <LogOut className='ml-2 text-gradient-start' />
-            </Button>
-
+            <Link href="/auth/login">
+                <Button variant="outline" className="hidden lg:flex">
+                    Login
+                    <LogOut className='ml-2 text-gradient-start' />
+                </Button>
+            </Link>
             {/* Mobile menu with animation */}
             <div className={`
         lg:hidden overflow-hidden w-full transition-all duration-300 ease-in-out

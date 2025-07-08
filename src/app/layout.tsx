@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 import { DM_Sans, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import Navbar from "@/components/shared/navbar";
+import Provider from "@/components/layout/provider";
+import { Toaster } from "sonner";
 
 // Load Google Fonts
 const dmSans = DM_Sans({
@@ -24,7 +26,10 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${dmSans.variable} antialiased`}>
-        {children}
+        <Provider >
+          {children}
+        </Provider>
+        <Toaster/>
       </body>
     </html>
   );
