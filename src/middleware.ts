@@ -6,6 +6,8 @@ export function mainMiddleware() {
 }
 
 export default protectedRoutes(mainMiddleware, [
-    "/dashboard",
-    "/dashboard/:path*",
+    "/docs",
+    "/monitoring",
+    "/pricing",
+    "/demo",
 ]);
