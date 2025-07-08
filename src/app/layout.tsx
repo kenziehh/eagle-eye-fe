@@ -16,6 +16,22 @@ const dmSans = DM_Sans({
 export const metadata: Metadata = {
   title: "Eagle Eye",
   description: "An AI-powered API to detect deepfakes in real time and log every incident securely on the blockchain, ensuring tamper-proof protection for your digital ecosystem.",
+  icons:{
+    icon: "/logo.png",
+    apple: "/logo.png",
+    other: [
+      {
+        rel: "icon",
+        url: "/logo.png",
+        sizes: "16x16",
+      },
+      {
+        rel: "icon",
+        url: "/logo.png",
+        sizes: "32x32",
+      },
+    ],
+  }
 };
 
 export default function RootLayout({
