@@ -36,15 +36,19 @@ export default function LoginContainer() {
 
     async function onSubmit(values: z.infer<typeof loginSchema>) {
         try {
-            await signIn("credentials", {
+            const result = await signIn("credentials", {
                 email: values.email,
                 password: values.password,
                 redirect: false,
             })
-            toast.success("Login successful")
-            router.push("/docs")
+
+            if (result?.ok) {
+                toast.success("Login successful")
+                router.push("/docs")
+            } else {
+                toast.error(result?.error || "Invalid email or password")
+            }
         } catch (error) {
-            console.log(error)
             if (error instanceof Error) {
                 toast.error(error.message || "Login failed")
             } else {
