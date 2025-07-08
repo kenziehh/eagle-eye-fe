@@ -76,8 +76,8 @@
 
 :root {
   --radius: 0.625rem;
-  --background: oklch(1 0 0);
-  --foreground: oklch(0.145 0 0);
+  --background: #251F4E;
+  --foreground: #FFFFFF;
   --card: oklch(1 0 0);
   --card-foreground: oklch(0.145 0 0);
   --popover: oklch(1 0 0);
@@ -180,4 +180,44 @@
     @apply text-[12px] leading-[17px];
   }
 
+}
+
+@layer components {
+  .container {
+    width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: var(--container-padding-sm);
+    padding-right: var(--container-padding-sm);
+
+    @media (min-width: 640px) {
+      max-width: var(--container-max-width-sm);
+      padding-left: var(--container-padding-sm);
+      padding-right: var(--container-padding-sm);
+    }
+
+    @media (min-width: 768px) {
+      max-width: var(--container-max-width-md);
+      padding-left: var(--container-padding-md);
+      padding-right: var(--container-padding-md);
+    }
+
+    @media (min-width: 1024px) {
+      max-width: var(--container-max-width-lg);
+      padding-left: var(--container-padding-lg);
+      padding-right: var(--container-padding-lg);
+    }
+
+    @media (min-width: 1280px) {
+      max-width: var(--container-max-width-xl);
+      padding-left: var(--container-padding-xl);
+      padding-right: var(--container-padding-xl);
+    }
+
+    @media (min-width: 1536px) {
+      max-width: var(--container-max-width-2xl);
+      padding-left: var(--container-padding-2xl);
+      padding-right: var(--container-padding-2xl);
+    }
+  }
 }
