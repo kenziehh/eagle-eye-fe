@@ -38,8 +38,7 @@ export default function RegisterPage() {
     })
 
     function onSubmit(values: z.infer<typeof formSchema>) {
-        // Handle registration logic here
-        console.log("Registration data:", values)
+        
     }
 
     return (
