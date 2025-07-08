@@ -72,6 +72,18 @@
   --color-primary-dark-active: #541697;
   --color-primary-darker: #3F1071;
 
+  --container-padding-sm: 16px;
+  --container-padding-md: 24px;
+  --container-padding-lg: 40px;
+  --container-padding-xl: 60px;
+  --container-padding-2xl: 80px;
+
+  /* Max-widths */
+  --container-max-width-sm: 640px;
+  --container-max-width-md: 768px;
+  --container-max-width-lg: 1024px;
+  --container-max-width-xl: 1280px;
+  --container-max-width-2xl: 1536px;
 }
 
 :root {
@@ -220,4 +232,35 @@
       padding-right: var(--container-padding-2xl);
     }
   }
+}
+
+@keyframes fade-in {
+  0% {
+    opacity: 0;
+    transform: translateY(-5px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fade-in {
+  animation: fade-in 0.3s ease forwards;
+}
+
+@keyframes blink {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0;
+  }
+}
+
+.typewriter-cursor {
+  display: inline-block;
+  width: 2px;
+  background-color: white;
+  animation: blink 1s step-start infinite;
 }
