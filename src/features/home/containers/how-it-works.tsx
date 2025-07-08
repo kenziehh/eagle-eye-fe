@@ -1,5 +1,6 @@
 import React from 'react'
 import Path from "@/assets/images/how-it-works-path.png"
+import PathWithStep from "@/assets/images/path.png"
 import Check from "@/assets/images/check-hiw.png"
 import Payment from "@/assets/images/payment-hiw.png"
 import Key from "@/assets/images/key-hiw.png"
@@ -8,13 +9,17 @@ import Integrate from "@/assets/images/integrate-hiw.png"
 import Question from "@/assets/images/question-rounded.png"
 import Image from 'next/image'
 
+
 export default function HowItWorks() {
     return (
         <>
-            <section className='py-20'>
+            <section className='py-10 md:py-20'>
 
             </section>
-            <section className='container relative'>
+            <section className='lg:hidden'>
+                <Image src={PathWithStep} alt='' className='w-full h-auto' />
+            </section>
+            <section className='container relative hidden lg:block'>
                 <div className='absolute z-10 left-[6%] -top-14'>
                     <div className="flex gap-3 items-center py-3 px-5 rounded-[40px] bg-gradient-to-r from-[#A626FF] via-[#8C24FB] to-[#7322F8] w-fit">
                         <Image src={Check} alt='' />
@@ -61,7 +66,7 @@ export default function HowItWorks() {
                 <Image src={Path} alt='' className='' />
 
             </section>
-            <section className='py-20'>
+            <section className='py-10 md:py-20'>
 
             </section>
         </>
