@@ -26,7 +26,7 @@ export default function Hero() {
         return () => clearInterval(interval);
     }, []);
     return (
-        <section className='py-10 md:py-24 relative'>
+        <section id='hero' className='py-10 md:py-24 relative'>
             <Image alt='' src={HeroRight2} className='absolute right-0' />
             <Image alt='' src={HeroRight1} className='absolute right-0' />
             <div className='flex justify-center items-center flex-col gap-4 md:gap-10'>

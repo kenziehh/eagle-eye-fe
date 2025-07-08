@@ -13,8 +13,11 @@ import Image from 'next/image'
 export default function HowItWorks() {
     return (
         <>
-            <section className='py-10 md:py-20'>
-
+            <section id='how' className='py-10 md:py-20 mb-28 container'>
+                <div className='flex flex-row gap-5 bg-[#482484] border-[#A626FF] border px-5 py-3 rounded-[50px]'>
+                    <Image src={Question} alt='' />
+                    <span className='font-bold text-lg md:text-2xl'>HOW IT WORKS?</span>
+                </div>
             </section>
             <section className='lg:hidden'>
                 <Image src={PathWithStep} alt='' className='w-full h-auto' />

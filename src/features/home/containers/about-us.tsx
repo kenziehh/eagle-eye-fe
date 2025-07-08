@@ -12,7 +12,7 @@ import Image from 'next/image'
 
 export default function AboutUs() {
     return (
-        <section className='relative py-10 md:py-24 mt-28'>
+        <section id='about' className='relative py-10 md:py-24 mt-28'>
             <div className='container flex flex-col xl:flex-row justify-between gap-10 items-center'>
                 <div className="relative max-w-[300px] d:max-w-[440px] border border-[#7322F8] rounded-xl bg-gradient-to-b from-[#A626FF] via-[#8C24FB] to-[#7322F8] shadow-lg py-9 pl-9 pr-12 ">
                     <div className='absolute z-10 left-8 -top-44'>

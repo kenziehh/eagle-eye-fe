@@ -46,7 +46,7 @@ const pricingPlans = [
 
 export default function Pricing() {
     return (
-        <section className='bg-[#3A3368] min-h-screen py-10 md:py-20 flex flex-col gap-8'>
+        <section id='pricing' className='bg-[#3A3368] min-h-screen py-10 md:py-20 flex flex-col gap-8'>
             <div className='flex items-center justify-center flex-col gap-6'>
                 <Image alt='' src={PricingIcon} />
                 <h1 className='text-xl md:text-6xl'>PRICING</h1>
