@@ -1,3 +1,4 @@
+import Footer from "@/components/shared/footer";
 import Navbar from "@/components/shared/navbar";
 import AboutUs from "@/sections/home/about-us";
 import Hero from "@/sections/home/hero";
@@ -11,10 +12,8 @@ export default function Home() {
       <Hero />
       <AboutUs />
       <HowItWorks />
-      <Pricing /> 
-      <main>
-
-      </main>
+      <Pricing />
+      <Footer />
     </>
 
   );
