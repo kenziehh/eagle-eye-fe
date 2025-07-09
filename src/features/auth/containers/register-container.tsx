@@ -13,8 +13,8 @@ import { useRouter } from "next/navigation"
 
 const registerSchema = z
     .object({
-        name: z.string().min(2, {
-            message: "Name must be at least 2 characters.",
+        username: z.string().min(2, {
+            message: "Username must be at least 2 characters.",
         }),
         email: z.string().email({
             message: "Please enter a valid email address.",
@@ -36,7 +36,7 @@ export default function RegisterContainer() {
     const form = useForm<z.infer<typeof registerSchema>>({
         resolver: zodResolver(registerSchema),
         defaultValues: {
-            name: "",
+            username: "",
             email: "",
             password: "",
             confirmPassword: "",
@@ -71,7 +71,7 @@ export default function RegisterContainer() {
                 <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
                     <FormField
                         control={form.control}
-                        name="name"
+                        name="username"
                         render={({ field }) => (
                             <FormItem>
                                 <FormLabel className="text-purple-200">Name</FormLabel>
