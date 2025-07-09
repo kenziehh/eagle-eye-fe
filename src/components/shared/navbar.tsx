@@ -27,7 +27,7 @@ export default function Navbar() {
 
     // Navigation links for logged in users (app navigation)
     const userNavLinks = [
-        { label: "Documentation", to: "documentation", href: "/documentation" },
+        { label: "Documentation", to: "documentation", href: "/docs" },
         { label: "Pricing", to: "pricing", href: "/pricing" },
         { label: "Monitoring", to: "monitoring", href: "/monitoring" },
         { label: "Demo Apps", to: "demo-apps", href: "/demo" },
