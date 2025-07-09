@@ -9,7 +9,7 @@ import Image from 'next/image'
 
 export default function Demo() {
     return (
-        <section className='bg-[#3A3368] py-12 md:py-28 relative'>
+        <section id='demo' className='bg-[#3A3368] py-12 md:py-28 relative'>
             <Image src={USBLeft} alt='USB Left' className='absolute left-0 top-40 z-10' />
             <Image src={USBBottom} alt='USB Bottom' className='absolute right-[10%] bottom-0 z-20' />
 
