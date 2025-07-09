@@ -18,7 +18,7 @@ export async function login(data: LoginFormValues) {
 export async function register(data: LoginFormValues) {
     const { data: responseData, error } = await tryCatch(
         async () => {
-            const response = await api.post('/auth/login', data)
+            const response = await api.post('/auth/register', data)
             return response.data
         }
     )
