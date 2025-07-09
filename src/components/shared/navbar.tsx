@@ -30,7 +30,7 @@ export default function Navbar() {
         { label: "Documentation", to: "documentation", href: "/documentation" },
         { label: "Pricing", to: "pricing", href: "/pricing" },
         { label: "Monitoring", to: "monitoring", href: "/monitoring" },
-        { label: "Demo Apps", to: "demo-apps", href: "/demo-apps" },
+        { label: "Demo Apps", to: "demo-apps", href: "/demo" },
     ]
 
     // Choose which nav links to use based on login state
