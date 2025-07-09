@@ -46,7 +46,7 @@ export default function DocumentationContainer() {
   }
 
   return (
-    <div className="min-h-screen bg-[#251F4E] flex">
+    <div className="min-h-screen bg-[#251F4E] flex py-20">
       {/* Desktop Sidebar */}
       <div className="hidden md:block w-80 bg-[#251F4E] backdrop-blur-sm border-r border-purple-600/30 p-6">
         <Sidebar sections={sidebarSections} activeItem={activeItem} onItemClick={handleMenuItemClick} />
