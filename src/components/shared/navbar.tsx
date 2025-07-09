@@ -6,8 +6,11 @@ import { LogOut, Menu, X } from 'lucide-react'
 import { Button } from '../ui/button'
 import { Link as ScrollLink } from 'react-scroll'
 import Link from 'next/link'
+import { useSession } from 'next-auth/react'
 
 export default function Navbar() {
+    const { data: session } = useSession()
+    console.log(session?.user)
     const [isOpen, setIsOpen] = useState(false)
 
     const toggleMenu = () => setIsOpen(!isOpen)
@@ -59,12 +62,24 @@ export default function Navbar() {
                     </ScrollLink>
                 ))}
             </div>
-            <Link href="/auth/login">
-                <Button variant="outline" className="hidden lg:flex">
-                    Login
-                    <LogOut className='ml-2 text-gradient-start' />
-                </Button>
-            </Link>
+            {
+                session?.user ? (
+                    <Link href="/auth/logout">
+                        <Button variant="outline" className="flex items-center justify-center">
+                            Logout
+                            <LogOut className='ml-2 text-gradient-start' />
+                        </Button>
+                    </Link>
+                ) : (
+                    <Link href="/auth/login">
+                        <Button variant="outline" className="flex items-center justify-center">
+                            Login
+                            <LogOut className='ml-2 text-gradient-start' />
+                        </Button>
+                    </Link>
+                )
+            }
+
             {/* Mobile menu with animation */}
             <div className={`
         lg:hidden overflow-hidden w-full transition-all duration-300 ease-in-out
@@ -86,10 +101,24 @@ export default function Navbar() {
                             {link.label}
                         </ScrollLink>
                     ))}
-                    <Button variant="outline" className="w-full mt-2">
-                        Login
-                        <LogOut className='ml-2 text-gradient-start' />
-                    </Button>
+                    {
+                        session?.user ? (
+                            <Link href="/auth/logout">
+                                <Button variant="outline" className="flex items-center justify-center">
+                                    Logout
+                                    <LogOut className='ml-2 text-gradient-start' />
+                                </Button>
+                            </Link>
+                        ) : (
+                            <Link href="/auth/login">
+                                <Button variant="outline" className="flex items-center justify-center">
+                                    Login
+                                    <LogOut className='ml-2 text-gradient-start' />
+                                </Button>
+                            </Link>
+                        )
+                    }
+
                 </div>
             </div>
         </nav>
