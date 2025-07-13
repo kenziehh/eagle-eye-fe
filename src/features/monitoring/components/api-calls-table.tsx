@@ -85,9 +85,8 @@ export function ApiCallsTable({ title, calls, searchPlaceholder = "Cari disini..
                           size="sm"
                           variant="outline"
                           onClick={() => handleBlockIP(call.ipAddress)}
-                          className="bg-purple-600 border-purple-500 text-white hover:bg-purple-700 text-xs"
+                          className="text-xs bg-primary text-white hover:bg-primary-dark"
                         >
-                          <Shield className="w-3 h-3 mr-1" />
                           Block IP
                         </Button>
                       ) : (
@@ -95,21 +94,20 @@ export function ApiCallsTable({ title, calls, searchPlaceholder = "Cari disini..
                           size="sm"
                           variant="outline"
                           onClick={() => handleUnblockIP(call.ipAddress)}
-                          className="bg-purple-600 border-purple-500 text-white hover:bg-purple-700 text-xs"
+                          className="text-xs bg-primary text-white hover:bg-primary-dark"
                         >
-                          <ShieldOff className="w-3 h-3 mr-1" />
                           Unblock IP
                         </Button>
                       )}
-                      <Button
+                      {/* <Button
                         size="sm"
                         variant="outline"
                         onClick={() => handleViewDetails(call.id)}
-                        className="border-purple-500 text-purple-200 hover:bg-purple-700/50 text-xs"
+                        className="bg-primary text-white hover:bg-primary-dark"
                       >
                         <Eye className="w-3 h-3 mr-1" />
                         Lihat Detail
-                      </Button>
+                      </Button> */}
                     </div>
                   </td>
                   <td className="py-3 px-4 text-purple-200 text-sm">{call.description || "-"}</td>

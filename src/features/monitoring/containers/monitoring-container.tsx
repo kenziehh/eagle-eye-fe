@@ -1,23 +1,25 @@
 "use client"
 
+import { ApiCallsResponse } from "@/features/docs/types"
 import { ApiCallsTable } from "../components/api-calls-table"
 import { ApiUsageChart } from "../components/api-usage-chart"
 import { mockApiCalls, mockStats, mockSuspiciousCalls } from "../data/monitoring-data"
+import { useRouter } from "next/navigation"
 
 
-export function MonitoringContainer() {
+export function MonitoringContainer({ apiCalls }: { apiCalls: ApiCallsResponse }) {
+  const router = useRouter()
   const handleAddQuota = () => {
-    console.log("Adding API quota...")
-    // Handle quota addition logic
+    router.push('/pricing')
   }
 
   return (
-    <div className="min-h-screen p-4 md:p-8">
-      <div className="max-w-7xl mx-auto space-y-8">
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+    <div className="min-h-screen container">
+      <div className=" space-y-8">
+        <div className="grid grid-cols-1 xl:grid-cols-3 gap-8">
           {/* Left Column - API Usage Chart */}
           <div className="lg:col-span-1">
-            <ApiUsageChart totalCalls={mockStats.totalCalls} onAddQuota={handleAddQuota} />
+            <ApiUsageChart totalCalls={Number.parseInt(apiCalls.customers.total_calls)} onAddQuota={handleAddQuota} />
           </div>
 
           {/* Right Column - API Calls Tables */}

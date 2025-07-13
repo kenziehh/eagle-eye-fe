@@ -17,7 +17,6 @@ export default async function DocumentationPage() {
         return (
             <>
                 <Navbar />
-                <div>Unable to fetch API key status.</div>
                 <Footer />
             </>
         )
