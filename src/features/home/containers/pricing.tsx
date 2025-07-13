@@ -7,6 +7,8 @@ import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { createPayment } from '@/features/payment/services'
 import { toast } from 'sonner'
+import { useSession } from 'next-auth/react'
+import { useRouter } from 'next/navigation'
 
 const pricingPlans = [
     {
@@ -56,9 +58,13 @@ const pricingPlans = [
 
 
 export default function Pricing() {
-
+    const { data: session } = useSession()
+    const router = useRouter();
     const handleCheckout = async (tierId: string) => {
         try {
+            if (!session?.user) {
+                router.push('/auth/login');
+            }
             const response = await createPayment(tierId);
             if (response && response.payments && response.payments.snap_url) {
                 window.location.href = response.payments.snap_url;
