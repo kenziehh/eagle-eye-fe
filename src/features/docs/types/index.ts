@@ -27,3 +27,23 @@ export interface ApiResponse {
   message: string
   timestamp: string
 }
+
+
+export interface GetKeyStatusResponse {
+  customers: {
+    is_customer: boolean
+    expires_at: string
+  }
+  message: string
+}
+
+export interface APIKeyResponse {
+  customers: {
+    api_key: string
+    expires_at: string
+  }
+  message: string
+}
+
+
+

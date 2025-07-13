@@ -7,8 +7,11 @@ import { Plus } from "lucide-react"
 import { ApiKeyForm } from "../components/api-key-form"
 import { ApiKeyCard } from "../components/api-key-card"
 import { mockApiKeys } from "../data/mock-data"
+import { GetKeyStatusResponse } from "../types"
+import { createApiKey } from "../services"
+import { toast } from "sonner"
 
-export function ApiKeyManagement() {
+export function ApiKeyManagement({ apiKeyStatus }: { apiKeyStatus: GetKeyStatusResponse }) {
   const [showCreateForm, setShowCreateForm] = useState(false)
   const [editingKey, setEditingKey] = useState<string | null>(null)
   const [showApiKey, setShowApiKey] = useState<{ [key: string]: boolean }>({})
@@ -19,16 +22,24 @@ export function ApiKeyManagement() {
     setShowApiKey((prev) => ({ ...prev, [keyId]: !prev[keyId] }))
   }
 
-  const handleCreateApiKey = () => {
-    console.log("Creating API key:", { name: newKeyName, environment: newKeyEnvironment })
-    setShowCreateForm(false)
-    setNewKeyName("")
-    setNewKeyEnvironment("")
+  const handleCreateApiKey = async () => {
+    try {
+      await createApiKey({ prefix: newKeyName })
+      setShowCreateForm(false)
+      setNewKeyName("")
+      setNewKeyEnvironment("")
+      toast.success("API Key created successfully")
+    } catch (error) {
+      toast.error(error as unknown as string)
+    }
+
   }
 
   const copyToClipboard = (text: string) => {
     navigator.clipboard.writeText(text)
   }
+
+
 
   return (
     <div className="space-y-6">
@@ -38,10 +49,13 @@ export function ApiKeyManagement() {
             <h1 className="text-3xl font-bold text-white mb-2">Manajemen API Key</h1>
             <p className="text-purple-200">Kelola API key untuk mengakses layanan EagleEye</p>
           </div>
-          <Button onClick={() => setShowCreateForm(true)} className="bg-[#251F4E] w-fit">
-            <Plus className="w-4 h-4 mr-2" />
-            Buat API Key Baru
-          </Button>
+          {apiKeyStatus.customers.expires_at && new Date(apiKeyStatus.customers.expires_at) > new Date() ? null : (
+            <Button onClick={() => setShowCreateForm(true)} className="bg-[#251F4E] w-fit">
+              <Plus className="w-4 h-4 mr-2" />
+              Buat API Key Baru
+            </Button>
+          )}
+
         </div>
         <Separator className="bg-purple-600/30 mt-4" />
       </div>
