@@ -5,6 +5,8 @@ import { MonitoringContainer } from '@/features/monitoring/containers/monitoring
 import { getListDeepfake, getListDetection } from '@/features/monitoring/services'
 import React from 'react'
 
+export const dynamic = 'force-dynamic'
+
 export default async function MonitoringPage() {
 
     const apiCalls = await getApiCalls()
