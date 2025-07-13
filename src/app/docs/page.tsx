@@ -1,11 +1,16 @@
+
 import Footer from '@/components/shared/footer'
 import Navbar from '@/components/shared/navbar'
 import DocumentationContainer from '@/features/docs/containers/documentation-container'
 import { getApiKeyStatus } from '@/features/docs/services'
 import React from 'react'
 
+export const dynamic = 'force-dynamic' 
+
+
 export default async function DocumentationPage() {
     const status = await getApiKeyStatus()
+
     if (!status) {
         return (
             <>
@@ -15,6 +20,7 @@ export default async function DocumentationPage() {
             </>
         )
     }
+
     return (
         <>
             <Navbar />
