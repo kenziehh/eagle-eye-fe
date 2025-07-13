@@ -6,11 +6,11 @@ import { Input } from "@/components/ui/input"
 import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
 import { Search, Eye, Shield, ShieldOff } from "lucide-react"
-import { ApiCall } from "../types"
+import { ApiCall, DetectionItem } from "../types"
 
 interface ApiCallsTableProps {
   title: string
-  calls: ApiCall[]
+  calls: DetectionItem[]
   searchPlaceholder?: string
 }
 
@@ -19,7 +19,7 @@ export function ApiCallsTable({ title, calls, searchPlaceholder = "Cari disini..
 
   const filteredCalls = calls.filter(
     (call) =>
-      call.ipAddress.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      call.ip_address.toLowerCase().includes(searchTerm.toLowerCase()) ||
       call.description?.toLowerCase().includes(searchTerm.toLowerCase()),
   )
 
@@ -65,26 +65,26 @@ export function ApiCallsTable({ title, calls, searchPlaceholder = "Cari disini..
             <tbody>
               {filteredCalls.map((call) => (
                 <tr key={call.id} className="border-b border-purple-600/20 hover:bg-purple-800/20">
-                  <td className="py-3 px-4 text-white font-mono text-sm">{call.ipAddress}</td>
+                  <td className="py-3 px-4 text-white font-mono text-sm">{call.ip_address}</td>
                   <td className="py-3 px-4">
                     <Badge
                       variant={call.status === "accepted" ? "default" : "destructive"}
                       className={
-                        call.status === "accepted"
+                        call.status === "Diterima"
                           ? "bg-green-600 hover:bg-green-600 text-white"
                           : "bg-red-600 hover:bg-red-600 text-white"
                       }
                     >
-                      {call.status === "accepted" ? "Diterima" : "Ditolak"}
+                      {call.status}
                     </Badge>
                   </td>
                   <td className="py-3 px-4">
                     <div className="flex flex-wrap gap-2">
-                      {call.status === "accepted" ? (
+                      {call.status === "Diterima" ? (
                         <Button
                           size="sm"
                           variant="outline"
-                          onClick={() => handleBlockIP(call.ipAddress)}
+                          onClick={() => handleBlockIP(call.ip_address)}
                           className="text-xs bg-primary text-white hover:bg-primary-dark"
                         >
                           Block IP
@@ -93,7 +93,7 @@ export function ApiCallsTable({ title, calls, searchPlaceholder = "Cari disini..
                         <Button
                           size="sm"
                           variant="outline"
-                          onClick={() => handleUnblockIP(call.ipAddress)}
+                          onClick={() => handleUnblockIP(call.ip_address)}
                           className="text-xs bg-primary text-white hover:bg-primary-dark"
                         >
                           Unblock IP
@@ -110,7 +110,13 @@ export function ApiCallsTable({ title, calls, searchPlaceholder = "Cari disini..
                       </Button> */}
                     </div>
                   </td>
-                  <td className="py-3 px-4 text-purple-200 text-sm">{call.description || "-"}</td>
+                  <td className="py-3 px-4 text-purple-200 text-sm">
+                    {call.status === "Ditolak"
+                      ? call.path === "/api/v1/detections/detect-image"
+                        ? "Ditolak pada API image"
+                        : "Ditolak pada API audio"
+                      : ""}
+                  </td>
                 </tr>
               ))}
             </tbody>

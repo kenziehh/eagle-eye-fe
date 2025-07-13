@@ -1,20 +1,35 @@
-export interface DetectionItem {
-    id: number;
-    ip_address: string;
-    path: string;
-    method: string;
-    status: string;
-    description: string;
-    accessed_at: string;
+import { tryCatch } from "@/lib/try-catch"
+import { GetListDetectionResponse } from "../types"
+import { api } from "@/lib/axios"
+
+export async function getListDetection() {
+    const { data, error } = await tryCatch(
+        async () => {
+            const response = await api.get<GetListDetectionResponse>(
+                `/detections/get-detections?current=1&limit=10`
+            )
+            return response.data
+        }
+    )
+
+    if (error) {
+        throw new Error(error.message)
+    }
+    return data
 }
 
-export interface Detections {
-    current_page: number;
-    total_items: DetectionItem[];
-    limit: number;
-}
+export async function getListDeepfake() {
+    const { data, error } = await tryCatch(
+        async () => {
+            const response = await api.get<GetListDetectionResponse>(
+                `/detections/get-detected?current=1&limit=10`
+            )
+            return response.data
+        }
+    )
 
-export interface GetListDetectionResponse {
-    detections: Detections;
-    message: string;
+    if (error) {
+        throw new Error(error.message)
+    }
+    return data
 }
