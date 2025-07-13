@@ -32,7 +32,7 @@ export function ApiKeyForm({
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           <div className="space-y-2">
             <Label htmlFor="keyName" className="text-purple-200">
-              Nama API Key
+              Custom Prefix API Key
             </Label>
             <Input
               id="keyName"
@@ -42,21 +42,7 @@ export function ApiKeyForm({
               className="bg-purple-900/50 border-purple-600/50 text-white"
             />
           </div>
-          <div className="space-y-2">
-            <Label htmlFor="environment" className="text-purple-200">
-              Environment
-            </Label>
-            <Select value={newKeyEnvironment} onValueChange={setNewKeyEnvironment}>
-              <SelectTrigger className="bg-purple-900/50 border-purple-600/50 text-white">
-                <SelectValue placeholder="Pilih environment" />
-              </SelectTrigger>
-              <SelectContent>
-                <SelectItem value="production">Production</SelectItem>
-                <SelectItem value="development">Development</SelectItem>
-                <SelectItem value="testing">Testing</SelectItem>
-              </SelectContent>
-            </Select>
-          </div>
+        
         </div>
         <div className="flex flex-col sm:flex-row gap-2 pt-4">
           <Button onClick={onSubmit} className="bg-purple-600 hover:bg-purple-700">

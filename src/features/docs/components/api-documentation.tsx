@@ -13,7 +13,7 @@ interface ApiDocumentationProps {
   endpoint: string
   curlExample: string
   responses: {
-    success: any
+    real: any
     deepfake: any
   }
   fileType: string
@@ -108,10 +108,10 @@ export function ApiDocumentation({
             <h4 className="text-white font-semibold mb-3">Response Examples</h4>
             <div className="space-y-4">
               <div>
-                <h5 className="text-purple-300 mb-2">Success (Authentic)</h5>
+                <h5 className="text-purple-300 mb-2">Real</h5>
                 <div className="bg-gray-900 rounded-lg p-4 overflow-x-auto">
                   <pre className="text-blue-400 text-sm">
-                    <code>{JSON.stringify(responses.success, null, 2)}</code>
+                    <code>{JSON.stringify(responses.real, null, 2)}</code>
                   </pre>
                 </div>
               </div>

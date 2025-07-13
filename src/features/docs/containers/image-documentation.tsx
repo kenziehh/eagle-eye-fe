@@ -8,7 +8,7 @@ export function ImageDocumentation() {
     <ApiDocumentation
       title="API Deteksi Deepfake - Image"
       description="Dokumentasi API untuk deteksi deepfake pada gambar menggunakan teknologi AI EagleEye"
-      endpoint="/v1/detect/image"
+      endpoint="https://karsa-api.bccdev.id/api/v1/detections/detect-image"
       curlExample={curlExamples.image}
       responses={apiResponses.image}
       fileType="image file (jpg, png, jpeg)"

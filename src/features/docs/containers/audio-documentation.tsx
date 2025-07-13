@@ -8,7 +8,7 @@ export function AudioDocumentation() {
     <ApiDocumentation
       title="API Deteksi Deepfake - Audio"
       description="Dokumentasi API untuk deteksi deepfake pada file audio menggunakan teknologi AI EagleEye"
-      endpoint="/v1/detect/audio"
+      endpoint="https://karsa-api.bccdev.id/api/v1/detections/detect-audio"
       curlExample={curlExamples.audio}
       responses={apiResponses.audio}
       fileType="audio file (mp3, wav, m4a)"

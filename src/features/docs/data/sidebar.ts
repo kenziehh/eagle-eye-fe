@@ -20,7 +20,7 @@ export const sidebarSections: SidebarSection[] = [
     icon: Lock,
     items: [
       { name: "Manajemen API Key", href: "/api-keys", id: "api-keys" },
-      { name: "Webhook & Notifikasi", href: "/webhooks", id: "webhooks" },
+      // { name: "Webhook & Notifikasi", href: "/webhooks", id: "webhooks" },
     ],
   },
 ]

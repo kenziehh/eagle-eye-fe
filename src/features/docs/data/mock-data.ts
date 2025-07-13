@@ -33,35 +33,41 @@ export const curlExamples = {
 
 export const apiResponses = {
   image: {
-    success: {
-      success: true,
-      result: "original" as const,
-      confidence: 0.95,
-      message: "Image is authentic",
-      timestamp: "2025-01-09T02:22:27Z",
+    real: {
+      detections: {
+        "filename": "image.jpg",
+        "prediction": "real",
+        "confidence": 0.95,
+      },
+      message: "success",
+
     },
     deepfake: {
-      success: true,
-      result: "fake" as const,
-      confidence: 0.87,
-      message: "Deepfake detected",
-      timestamp: "2025-01-09T02:22:27Z",
-    },
+      detections: {
+        "filename": "image.jpg",
+        "prediction": "real",
+        "confidence": 0.95,
+      },
+      message: "success",
+    }
   },
   audio: {
-    success: {
-      success: true,
-      result: "original" as const,
-      confidence: 0.92,
-      message: "Audio is authentic",
-      timestamp: "2025-01-09T02:22:27Z",
+     real: {
+      detections: {
+        "filename": "image.jpg",
+        "prediction": "real",
+        "confidence": 0.95,
+      },
+      message: "success",
+
     },
     deepfake: {
-      success: true,
-      result: "fake" as const,
-      confidence: 0.89,
-      message: "Deepfake audio detected",
-      timestamp: "2025-01-09T02:22:27Z",
-    },
+      detections: {
+        "filename": "image.jpg",
+        "prediction": "real",
+        "confidence": 0.95,
+      },
+      message: "success",
+    }
   },
 }

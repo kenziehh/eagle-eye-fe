@@ -33,13 +33,13 @@ export default function DocumentationContainer() {
             <p className="text-purple-200">Halaman overview akun akan ditampilkan di sini.</p>
           </div>
         )
-      case "webhooks":
-        return (
-          <div className="space-y-6">
-            <h1 className="text-3xl font-bold text-white">Webhook & Notifikasi</h1>
-            <p className="text-purple-200">Halaman webhook dan notifikasi akan ditampilkan di sini.</p>
-          </div>
-        )
+      // case "webhooks":
+      //   return (
+      //     <div className="space-y-6">
+      //       <h1 className="text-3xl font-bold text-white">Webhook & Notifikasi</h1>
+      //       <p className="text-purple-200">Halaman webhook dan notifikasi akan ditampilkan di sini.</p>
+      //     </div>
+      //   )
       default:
         return <ImageDocumentation/>
     }
