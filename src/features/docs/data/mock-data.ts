@@ -26,7 +26,7 @@ export const curlExamples = {
   -H "x-api-key: your_api_key_here" \\
   -F "file=@/path/to/your/image.jpg"`,
 
-  audio: `curl -X POST "https://karsa-api.bccdev.id/api/detections/detect-image" \\
+  audio: `curl -X POST "https://karsa-api.bccdev.id/api/detections/detect-audio" \\
   -H "x-api-key: your_api_key_here" \\
   -F "file=@/path/to/your/audio.wav"`,
 }
