@@ -2,10 +2,10 @@ import { api } from "@/lib/axios"
 import { CreatePaymentResponse, LatestPaymentStatusResponse } from "../types"
 import { tryCatch } from "@/lib/try-catch"
 
-export async function createPayment(){
+export async function createPayment(tier_order: string) {
     const { data, error } = await tryCatch(
         async () => {
-            const response = await api.post<CreatePaymentResponse>('/payments/create-payment')
+            const response = await api.post<CreatePaymentResponse>('/payments/create-payment', { tier_order })
             return response.data
         }
     )
@@ -15,7 +15,7 @@ export async function createPayment(){
     return data
 }
 
-export async function getLatestPaymentStatus(){
+export async function getLatestPaymentStatus() {
     const { data, error } = await tryCatch(
         async () => {
             const response = await api.get<LatestPaymentStatusResponse>('/payments/latest-status')

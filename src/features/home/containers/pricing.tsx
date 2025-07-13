@@ -1,50 +1,75 @@
+"use client"
 import React from 'react'
 import PricingIcon from '@/assets/images/pricing-icon.png'
 import Image from 'next/image'
 import { Check, X, DollarSign } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
+import { createPayment } from '@/features/payment/services'
+import { toast } from 'sonner'
 
 const pricingPlans = [
     {
+        name: "Gratis",
+        price: 0,
+        description: "Cocok untuk testing dan pengguna awal.",
+        features: [
+            { name: "20 Verifikasi API / Bulan", included: true },
+            { name: "Biaya kelebihan pemakaian: Upgrade ke Basic", included: true },
+            { name: "✅ Deteksi Wajah (Gambar)", included: true },
+            { name: "✅ Dashboard Lengkap", included: true },
+            { name: "❌ Keamanan Tambahan", included: false },
+            { name: "❌ Dukungan Prioritas", included: false },
+        ],
+    },
+    {
+        id: "basic",
         name: "Basic",
-        price: 49,
-        description: "Ideal for startups or MVPs looking to verify 100-500 users/month.",
+        price: 3500000,
+        description: "Ideal untuk startup dengan kebutuhan sedang.",
         features: [
-            { name: "Up to 1,000 API calls/month", included: true },
-            { name: "Image & ID verification", included: true },
-            { name: "Access to dashboard", included: true },
-            { name: "Voice verification", included: false },
-            { name: "Blockchain logging", included: false },
+            { name: "2.500 Verifikasi API / Bulan", included: true },
+            { name: "Biaya kelebihan: Rp 1.500 / verifikasi", included: true },
+            { name: "✅ Deteksi Wajah (Gambar & Video)", included: true },
+            { name: "✅ Dashboard Lengkap", included: true },
+            { name: "✅ IP Banning Manual", included: true },
+            { name: "✅ Dukungan Prioritas via Email", included: true },
         ],
     },
     {
-        name: "Pro",
-        price: 99,
-        description: "Best for growing platforms handling 2,000-10,000 verifications/month.",
+        id: "premium",
+        name: "Premium",
+        price: 15000000,
+        description: "Solusi lengkap untuk fintech skala besar.",
         features: [
-            { name: "10,000 API calls/month", included: true },
-            { name: "Image, ID & voice verification", included: true },
-            { name: "Real-time fraud alerts", included: true },
-            { name: "Custom endpoint access", included: false },
-            { name: "Limited blockchain logging", included: false },
+            { name: "15.000 Verifikasi API / Bulan", included: true },
+            { name: "Biaya kelebihan: Rp 1.200 / verifikasi", included: true },
+            { name: "✅ Deteksi Wajah (Gambar & Video)", included: true },
+            { name: "✅ Deteksi Suara (Voiceprint)", included: true },
+            { name: "✅ Dashboard Analitik & Kustom", included: true },
+            { name: "✅ IP Banning Otomatis", included: true },
+            { name: "✅ Penyimpanan Data di Blockchain", included: true },
+            { name: "✅ Manajer Akun Khusus & Dukungan 24/7", included: true },
         ],
     },
-    {
-        name: "Enterprise",
-        price: 249,
-        description: "For large-scale fintechs or government verification systems.",
-        features: [
-            { name: "Unlimited API usage", included: true },
-            { name: "Full verification (image, voice, vid..)", included: true },
-            { name: "Custom endpoint access", included: true },
-            { name: "Advanced analytics & IP blocking", included: true },
-            { name: "Dedicated account manager", included: true },
-        ],
-    },
-]
+];
+
 
 export default function Pricing() {
+
+    const handleCheckout = async (tierId: string) => {
+        try {
+            const response = await createPayment(tierId);
+            if (response && response.payments && response.payments.snap_url) {
+                window.location.href = response.payments.snap_url;
+            } else {
+                toast.error("Payment initiation failed. Please try again.");
+            }
+        } catch (err) {
+            console.error("Payment failed:", err);
+            alert("Failed to initiate payment. Please try again.");
+        }
+    };
     return (
         <section id='pricing' className='bg-[#3A3368] min-h-screen py-10 md:py-20 flex flex-col gap-8'>
             <div className='flex items-center justify-center flex-col gap-6'>
@@ -83,8 +108,11 @@ export default function Pricing() {
 
                             <div className="pt-6">
                                 <Button
+                                    disabled={!plan.id}
                                     className="w-full bg-[#7322F8]/20 hover:bg-[#7322F8] text-white font-medium py-3 rounded-full border border-purple-500"
                                     size="lg"
+                                    onClick={() => handleCheckout(plan.id ?? "")}
+
                                 >
                                     Get Started
                                 </Button>

@@ -80,7 +80,7 @@ export default function Navbar() {
             <div className="flex items-center justify-between w-full lg:w-auto">
                 {session?.user ? (
                     // If logged in, logo links to dashboard/home page
-                    <Link href="/dashboard" className="cursor-pointer hover:text-primary transition-colors">
+                    <Link href="/" className="cursor-pointer hover:text-primary transition-colors">
                         <Image src={"/images/logo-nav.png"} alt="Logo" width={180} height={60} />
                     </Link>
                 ) : (
