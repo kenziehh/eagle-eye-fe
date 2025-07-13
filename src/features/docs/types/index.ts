@@ -1,11 +1,6 @@
 export interface ApiKey {
-  id: string
-  name: string
-  key: string
-  status: "active" | "inactive"
-  createdAt: string
-  lastUsed: string
-  requests: number
+  total_calls: string
+  expires_at: string
 }
 
 export interface SidebarSection {
@@ -47,3 +42,10 @@ export interface APIKeyResponse {
 
 
 
+export interface ApiCallsResponse {
+  customers: {
+    total_calls: string
+    expires_at: string
+  }
+  message: string
+}

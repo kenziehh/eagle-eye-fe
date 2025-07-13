@@ -6,14 +6,21 @@ import { Button } from "@/components/ui/button"
 import { Plus } from "lucide-react"
 import { ApiKeyForm } from "../components/api-key-form"
 import { ApiKeyCard } from "../components/api-key-card"
-import { mockApiKeys } from "../data/mock-data"
-import { GetKeyStatusResponse } from "../types"
-import { createApiKey } from "../services"
+import { ApiCallsResponse, GetKeyStatusResponse } from "../types"
+import { createApiKey, updateApiKey } from "../services"
 import { toast } from "sonner"
+import { downloadApiKeyTxt } from "@/lib/download"
 
-export function ApiKeyManagement({ apiKeyStatus }: { apiKeyStatus: GetKeyStatusResponse }) {
+export function ApiKeyManagement({
+  apiKeyStatus,
+  apiCalls,
+}: {
+  apiKeyStatus: GetKeyStatusResponse
+  apiCalls: ApiCallsResponse
+}) {
   const [showCreateForm, setShowCreateForm] = useState(false)
-  const [editingKey, setEditingKey] = useState<string | null>(null)
+  const [editingKeyId, setEditingKeyId] = useState<string | null>(null)
+  const [editingValue, setEditingValue] = useState("")
   const [showApiKey, setShowApiKey] = useState<{ [key: string]: boolean }>({})
   const [newKeyName, setNewKeyName] = useState("")
   const [newKeyEnvironment, setNewKeyEnvironment] = useState("")
@@ -24,7 +31,14 @@ export function ApiKeyManagement({ apiKeyStatus }: { apiKeyStatus: GetKeyStatusR
 
   const handleCreateApiKey = async () => {
     try {
-      await createApiKey({ prefix: newKeyName })
+      const response = await createApiKey({ prefix: newKeyName })
+      const apiKey = response?.customers.api_key
+      if (apiKey) {
+        downloadApiKeyTxt(apiKey)
+        toast.success("API Key created successfully")
+      } else {
+        toast.error("API Key is undefined")
+      }
       setShowCreateForm(false)
       setNewKeyName("")
       setNewKeyEnvironment("")
@@ -32,14 +46,32 @@ export function ApiKeyManagement({ apiKeyStatus }: { apiKeyStatus: GetKeyStatusR
     } catch (error) {
       toast.error(error as unknown as string)
     }
+  }
 
+  const handleUpdateApiKey = async () => {
+    try {
+      if (!editingKeyId) return
+      const response = await updateApiKey({ prefix: editingValue })
+      const apiKey = response?.customers.api_key
+      if (apiKey) {
+        downloadApiKeyTxt(apiKey)
+        toast.success("API Key updated successfully")
+      } else {
+        toast.error("API Key is undefined")
+      }
+      setEditingKeyId(null)
+      setEditingValue("")
+    } catch (error) {
+      toast.error(error as unknown as string)
+    }
   }
 
   const copyToClipboard = (text: string) => {
     navigator.clipboard.writeText(text)
+    toast.success("Copied to clipboard")
   }
 
-
+  const customerKey = apiCalls.customers
 
   return (
     <div className="space-y-6">
@@ -49,13 +81,13 @@ export function ApiKeyManagement({ apiKeyStatus }: { apiKeyStatus: GetKeyStatusR
             <h1 className="text-3xl font-bold text-white mb-2">Manajemen API Key</h1>
             <p className="text-purple-200">Kelola API key untuk mengakses layanan EagleEye</p>
           </div>
-          {apiKeyStatus.customers.expires_at && new Date(apiKeyStatus.customers.expires_at) > new Date() ? null : (
+          {apiKeyStatus.customers.expires_at &&
+            new Date(apiKeyStatus.customers.expires_at) > new Date() ? null : (
             <Button onClick={() => setShowCreateForm(true)} className="bg-[#251F4E] w-fit">
               <Plus className="w-4 h-4 mr-2" />
               Buat API Key Baru
             </Button>
           )}
-
         </div>
         <Separator className="bg-purple-600/30 mt-4" />
       </div>
@@ -74,20 +106,25 @@ export function ApiKeyManagement({ apiKeyStatus }: { apiKeyStatus: GetKeyStatusR
 
       {/* API Keys List */}
       <div className="space-y-4">
-        {mockApiKeys.map((apiKey) => (
-          <ApiKeyCard
-            key={apiKey.id}
-            apiKey={apiKey}
-            showApiKey={showApiKey[apiKey.id] || false}
-            editingKey={editingKey === apiKey.id}
-            onToggleVisibility={() => toggleApiKeyVisibility(apiKey.id)}
-            onCopy={copyToClipboard}
-            onEdit={() => setEditingKey(apiKey.id)}
-            onSave={() => setEditingKey(null)}
-            onCancelEdit={() => setEditingKey(null)}
-            onDelete={() => console.log("Delete key:", apiKey.id)}
-          />
-        ))}
+        <ApiKeyCard
+          apiKey={customerKey}
+          showApiKey={showApiKey["customers"] ?? false}
+          editingKey={editingKeyId === "customers"}
+          editingValue={editingValue}
+          onToggleVisibility={() => toggleApiKeyVisibility("customers")}
+          onCopy={copyToClipboard}
+          onEdit={() => {
+            setEditingKeyId("customers")
+            setEditingValue("") // Optional: setEditingValue(customerKey.prefix || "")
+          }}
+          onSave={handleUpdateApiKey}
+          onCancelEdit={() => {
+            setEditingKeyId(null)
+            setEditingValue("")
+          }}
+          onChangeEditingValue={setEditingValue}
+        />
+
       </div>
     </div>
   )

@@ -1,6 +1,6 @@
 import { api } from "@/lib/axios"
 import { tryCatch } from "@/lib/try-catch"
-import { APIKeyResponse, GetKeyStatusResponse } from "../types"
+import { ApiCallsResponse, APIKeyResponse, GetKeyStatusResponse } from "../types"
 import { AxiosError } from "axios"
 
 export async function createApiKey({ prefix }: { prefix: string }) {
@@ -47,6 +47,22 @@ export async function getApiKeyStatus() {
         async () => {
             const response = await api.get<GetKeyStatusResponse>(
                 `/customers/key-status`
+            )
+            return response.data
+        }
+    )
+
+    if (error) {
+        throw new Error(error.message)
+    }
+    return data
+}
+
+export async function getApiCalls() {
+    const { data, error } = await tryCatch(
+        async () => {
+            const response = await api.get<ApiCallsResponse>(
+                `/customers/api-calls`
             )
             return response.data
         }

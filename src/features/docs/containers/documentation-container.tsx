@@ -7,10 +7,10 @@ import { ApiKeyManagement } from "./api-key-management"
 import { Sidebar } from "../components/sidebar"
 import { sidebarSections } from "../data/sidebar"
 import { MobileHeader } from "../components/mobile-header"
-import { GetKeyStatusResponse } from "../types"
+import { ApiCallsResponse, GetKeyStatusResponse } from "../types"
 
 
-export default function DocumentationContainer({ apiKeyStatus }: { apiKeyStatus: GetKeyStatusResponse }) {
+export default function DocumentationContainer({ apiKeyStatus, apiCalls }: { apiKeyStatus: GetKeyStatusResponse, apiCalls: ApiCallsResponse }) {
   // State to manage active sidebar item and mobile sidebar
   const [activeItem, setActiveItem] = useState("image-detection")
   const [sidebarOpen, setSidebarOpen] = useState(false)
@@ -27,7 +27,7 @@ export default function DocumentationContainer({ apiKeyStatus }: { apiKeyStatus:
       case "audio-detection":
         return <AudioDocumentation />
       case "api-keys":
-        return <ApiKeyManagement apiKeyStatus={apiKeyStatus} />
+        return <ApiKeyManagement apiKeyStatus={apiKeyStatus} apiCalls={apiCalls} />
       case "account":
         return (
           <div className="space-y-6">

@@ -2,16 +2,18 @@
 import Footer from '@/components/shared/footer'
 import Navbar from '@/components/shared/navbar'
 import DocumentationContainer from '@/features/docs/containers/documentation-container'
-import { getApiKeyStatus } from '@/features/docs/services'
+import { getApiCalls, getApiKeyStatus } from '@/features/docs/services'
 import React from 'react'
 
-export const dynamic = 'force-dynamic' 
+export const dynamic = 'force-dynamic'
 
 
 export default async function DocumentationPage() {
     const status = await getApiKeyStatus()
+    const apiCalls = await getApiCalls()
 
-    if (!status) {
+
+    if (!status || !apiCalls) {
         return (
             <>
                 <Navbar />
@@ -24,7 +26,7 @@ export default async function DocumentationPage() {
     return (
         <>
             <Navbar />
-            <DocumentationContainer apiKeyStatus={status} />
+            <DocumentationContainer apiKeyStatus={status} apiCalls={apiCalls} />
             <Footer />
         </>
     )

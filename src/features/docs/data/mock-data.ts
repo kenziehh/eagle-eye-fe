@@ -1,25 +1,25 @@
 import { ApiKey } from "../types"
 
-export const mockApiKeys: ApiKey[] = [
-  {
-    id: "1",
-    name: "Production API Key",
-    key: "eak_live_1234567890abcdef",
-    status: "active",
-    createdAt: "2025-01-01",
-    lastUsed: "2025-01-08",
-    requests: 15420,
-  },
-  {
-    id: "2",
-    name: "Development API Key",
-    key: "eak_test_abcdef1234567890",
-    status: "active",
-    createdAt: "2024-12-15",
-    lastUsed: "2025-01-09",
-    requests: 892,
-  },
-]
+// export const mockApiKeys: ApiKey[] = [
+//   {
+//     id: "1",
+//     name: "Production API Key",
+//     key: "eak_live_1234567890abcdef",
+//     status: "active",
+//     createdAt: "2025-01-01",
+//     lastUsed: "2025-01-08",
+//     requests: 15420,
+//   },
+//   {
+//     id: "2",
+//     name: "Development API Key",
+//     key: "eak_test_abcdef1234567890",
+//     status: "active",
+//     createdAt: "2024-12-15",
+//     lastUsed: "2025-01-09",
+//     requests: 892,
+//   },
+// ]
 
 export const curlExamples = {
   image: `curl -X POST "https://karsa-api.bccdev.id/api/detections/detect-image" \\
