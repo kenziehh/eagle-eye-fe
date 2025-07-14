@@ -3,13 +3,20 @@
 import { ApiCallsResponse } from "@/features/docs/types"
 import { ApiCallsTable } from "../components/api-calls-table"
 import { ApiUsageChart } from "../components/api-usage-chart"
-import { mockApiCalls, mockStats, mockSuspiciousCalls } from "../data/monitoring-data"
 import { useRouter } from "next/navigation"
 import { GetListDetectionResponse } from "../types"
 
-
-export function MonitoringContainer({ apiCalls, detectionLists, deepfakeLists }: { apiCalls: ApiCallsResponse, detectionLists: GetListDetectionResponse, deepfakeLists: GetListDetectionResponse }) {
+export function MonitoringContainer({
+  apiCalls,
+  detectionLists,
+  deepfakeLists
+}: {
+  apiCalls: ApiCallsResponse,
+  detectionLists: GetListDetectionResponse,
+  deepfakeLists: GetListDetectionResponse
+}) {
   const router = useRouter()
+
   const handleAddQuota = () => {
     router.push('/pricing')
   }
@@ -25,12 +32,22 @@ export function MonitoringContainer({ apiCalls, detectionLists, deepfakeLists }:
 
           {/* Right Column - API Calls Tables */}
           <div className="lg:col-span-2 space-y-8">
-            <ApiCallsTable title="List Pemanggilan API" calls={detectionLists.detections.total_items} searchPlaceholder="Cari disini..." />
+            <ApiCallsTable
+              title="List Pemanggilan API"
+              calls={detectionLists.detections.items}
+              searchPlaceholder="Cari disini..."
+              totalPages={detectionLists.detections.total_page}
+              currentPage={detectionLists.detections.current_page}
+              pageParam="detection_page"
+            />
 
             <ApiCallsTable
               title="List Percobaan Mencurigakan"
-              calls={deepfakeLists.detections.total_items}
+              calls={deepfakeLists.detections.items}
               searchPlaceholder="Cari disini..."
+              totalPages={deepfakeLists.detections.total_page}
+              currentPage={deepfakeLists.detections.current_page}
+              pageParam="deepfake_page"
             />
           </div>
         </div>

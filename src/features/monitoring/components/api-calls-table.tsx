@@ -5,23 +5,43 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Input } from "@/components/ui/input"
 import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
-import { Search, Eye, Shield, ShieldOff } from "lucide-react"
-import { ApiCall, DetectionItem } from "../types"
+import { Search } from "lucide-react"
+import { DetectionItem } from "../types"
+import { useRouter, useSearchParams } from "next/navigation"
 
 interface ApiCallsTableProps {
   title: string
   calls: DetectionItem[]
+  totalPages?: number
+  currentPage?: number
   searchPlaceholder?: string
+  pageParam: string // "detection_page" or "deepfake_page"
 }
 
-export function ApiCallsTable({ title, calls, searchPlaceholder = "Cari disini..." }: ApiCallsTableProps) {
+export function ApiCallsTable({
+  title,
+  calls,
+  searchPlaceholder = "Cari disini...",
+  totalPages,
+  currentPage,
+  pageParam
+}: ApiCallsTableProps) {
   const [searchTerm, setSearchTerm] = useState("")
+  const router = useRouter()
+  const searchParams = useSearchParams()
 
+  // Filter calls based on search term
   const filteredCalls = calls.filter(
     (call) =>
       call.ip_address.toLowerCase().includes(searchTerm.toLowerCase()) ||
       call.description?.toLowerCase().includes(searchTerm.toLowerCase()),
   )
+
+  const handlePageChange = (page: number) => {
+    const params = new URLSearchParams(searchParams)
+    params.set(pageParam, page.toString())
+    router.push(`?${params.toString()}`)
+  }
 
   const handleBlockIP = (ipAddress: string) => {
     console.log("Blocking IP:", ipAddress)
@@ -29,10 +49,6 @@ export function ApiCallsTable({ title, calls, searchPlaceholder = "Cari disini..
 
   const handleUnblockIP = (ipAddress: string) => {
     console.log("Unblocking IP:", ipAddress)
-  }
-
-  const handleViewDetails = (callId: string) => {
-    console.log("Viewing details for call:", callId)
   }
 
   return (
@@ -99,15 +115,6 @@ export function ApiCallsTable({ title, calls, searchPlaceholder = "Cari disini..
                           Unblock IP
                         </Button>
                       )}
-                      {/* <Button
-                        size="sm"
-                        variant="outline"
-                        onClick={() => handleViewDetails(call.id)}
-                        className="bg-primary text-white hover:bg-primary-dark"
-                      >
-                        <Eye className="w-3 h-3 mr-1" />
-                        Lihat Detail
-                      </Button> */}
                     </div>
                   </td>
                   <td className="py-3 px-4 text-purple-200 text-sm">
@@ -124,6 +131,27 @@ export function ApiCallsTable({ title, calls, searchPlaceholder = "Cari disini..
 
           {filteredCalls.length === 0 && (
             <div className="text-center py-8 text-purple-300">Tidak ada data yang ditemukan</div>
+          )}
+
+          {filteredCalls.length > 0 && totalPages && totalPages > 1 && (
+            <div className="flex justify-center mt-4">
+              <div className="flex gap-2">
+                {Array.from({ length: totalPages }, (_, i) => i + 1).map((page) => (
+                  <Button
+                    key={page}
+                    size="sm"
+                    variant={page === currentPage ? "default" : "outline"}
+                    onClick={() => handlePageChange(page)}
+                    className={`text-xs ${page === currentPage
+                      ? "bg-purple-600 text-white"
+                      : "text-purple-300 border-purple-500 hover:bg-purple-700"
+                      }`}
+                  >
+                    {page}
+                  </Button>
+                ))}
+              </div>
+            </div>
           )}
         </div>
       </CardContent>

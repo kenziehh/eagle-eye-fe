@@ -32,8 +32,9 @@ export interface DetectionItem {
 
 export interface Detections {
     current_page: number;
-    total_items: DetectionItem[];
+    items: DetectionItem[];
     limit: number;
+    total_page: number;
 }
 
 export interface GetListDetectionResponse {
