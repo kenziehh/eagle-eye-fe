@@ -5,23 +5,24 @@ import Navbar from '@/components/shared/navbar'
 import Footer from '@/components/shared/footer'
 
 interface MonitoringPageProps {
-    searchParams?: {
+    searchParams: Promise<{
         detection_page?: string
         deepfake_page?: string
-    }
+    }>
 }
 
 export const dynamic = 'force-dynamic'
 
 export default async function MonitoringPage({ searchParams }: MonitoringPageProps) {
-    const { detection_page, deepfake_page } = await searchParams || {}
+    const params = await searchParams
+    const { detection_page, deepfake_page } = params
+
     const detectionPage = parseInt(detection_page || '1', 10)
     const deepfakePage = parseInt(deepfake_page || '1', 10)
 
     const apiCalls = await getApiCalls()
     const detectionLists = await getListDetection(detectionPage)
     const deepfakeLists = await getListDeepfake(deepfakePage)
-
     return (
         <>
             <Navbar />
