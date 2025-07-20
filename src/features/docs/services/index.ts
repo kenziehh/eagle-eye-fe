@@ -51,10 +51,6 @@ export async function getApiKeyStatus() {
             return response.data
         }
     )
-
-    if (error) {
-        throw new Error(error.message)
-    }
     return data
 }
 
@@ -68,8 +64,8 @@ export async function getApiCalls() {
         }
     )
 
-    if (error) {
-        throw new Error(error.message)
-    }
+    // if (error) {
+    //     throw new Error(error.message)
+    // }
     return data
 }

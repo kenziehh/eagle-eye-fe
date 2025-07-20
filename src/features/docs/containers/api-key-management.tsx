@@ -81,7 +81,7 @@ export function ApiKeyManagement({
             <h1 className="text-3xl font-bold text-white mb-2">Manajemen API Key</h1>
             <p className="text-purple-200">Kelola API key untuk mengakses layanan EagleEye</p>
           </div>
-          {apiKeyStatus.customers.expires_at &&
+          {apiKeyStatus.customers.expires_at && apiKeyStatus.customers.is_customer &&
             new Date(apiKeyStatus.customers.expires_at) > new Date() ? null : (
             <Button onClick={() => setShowCreateForm(true)} className="bg-[#251F4E] w-fit">
               <Plus className="w-4 h-4 mr-2" />
@@ -106,7 +106,9 @@ export function ApiKeyManagement({
 
       {/* API Keys List */}
       <div className="space-y-4">
-        <ApiKeyCard
+        {
+          apiKeyStatus.customers.is_customer ? (
+            <ApiKeyCard
           apiKey={customerKey}
           showApiKey={showApiKey["customers"] ?? false}
           editingKey={editingKeyId === "customers"}
@@ -124,6 +126,12 @@ export function ApiKeyManagement({
           }}
           onChangeEditingValue={setEditingValue}
         />
+          ):(
+            <div className="text-gray-400">
+              Anda belum memiliki API Key. Silakan buat API Key baru untuk mengakses layanan.
+            </div>
+          )
+        }
 
       </div>
     </div>
