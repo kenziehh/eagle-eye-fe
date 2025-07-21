@@ -18,10 +18,10 @@ const pricingPlans = [
         features: [
             { name: "20 Verifikasi API / Bulan", included: true },
             { name: "Biaya kelebihan pemakaian: Upgrade ke Basic", included: true },
-            { name: "✅ Deteksi Wajah (Gambar)", included: true },
-            { name: "✅ Dashboard Lengkap", included: true },
-            { name: "❌ Keamanan Tambahan", included: false },
-            { name: "❌ Dukungan Prioritas", included: false },
+            { name: "Deteksi Wajah (Gambar)", included: true },
+            { name: "Dashboard Lengkap", included: true },
+            { name: "Keamanan Tambahan", included: false },
+            { name: "Dukungan Prioritas", included: false },
         ],
     },
     {
@@ -32,10 +32,10 @@ const pricingPlans = [
         features: [
             { name: "2.500 Verifikasi API / Bulan", included: true },
             { name: "Biaya kelebihan: Rp 1.500 / verifikasi", included: true },
-            { name: "✅ Deteksi Wajah (Gambar & Video)", included: true },
-            { name: "✅ Dashboard Lengkap", included: true },
-            { name: "✅ IP Banning Manual", included: true },
-            { name: "✅ Dukungan Prioritas via Email", included: true },
+            { name: "Deteksi Wajah (Gambar & Video)", included: true },
+            { name: "Dashboard Lengkap", included: true },
+            { name: "IP Banning Manual", included: true },
+            { name: "Dukungan Prioritas via Email", included: true },
         ],
     },
     {
@@ -46,12 +46,12 @@ const pricingPlans = [
         features: [
             { name: "15.000 Verifikasi API / Bulan", included: true },
             { name: "Biaya kelebihan: Rp 1.200 / verifikasi", included: true },
-            { name: "✅ Deteksi Wajah (Gambar & Video)", included: true },
-            { name: "✅ Deteksi Suara (Voiceprint)", included: true },
-            { name: "✅ Dashboard Analitik & Kustom", included: true },
-            { name: "✅ IP Banning Otomatis", included: true },
-            { name: "✅ Penyimpanan Data di Blockchain", included: true },
-            { name: "✅ Manajer Akun Khusus & Dukungan 24/7", included: true },
+            { name: "Deteksi Wajah (Gambar & Video)", included: true },
+            { name: "Deteksi Suara (Voiceprint)", included: true },
+            { name: "Dashboard Analitik & Kustom", included: true },
+            { name: "IP Banning Otomatis", included: true },
+            { name: "Penyimpanan Data di Blockchain", included: true },
+            { name: "Manajer Akun Khusus & Dukungan 24/7", included: true },
         ],
     },
 ];
@@ -91,7 +91,7 @@ export default function Pricing() {
                                 {plan.description}
                             </CardDescription>
                             <div className="mt-6">
-                                <span className="text-4xl font-bold text-white">${plan.price}</span>
+                                <span className="text-4xl font-bold text-white">Rp. {plan.price}</span>
                                 <span className="text-purple-200 ml-2">/ month</span>
                             </div>
                         </CardHeader>
