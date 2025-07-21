@@ -7,9 +7,16 @@ import { toast } from 'sonner'
 export default function LogoutPage() {
     const router = useRouter()
     useEffect(() => {
-        signOut()
-        toast.success("You have been logged out successfully.")
-        router.push('/auth/login')
+        const logout = async () => {
+            try {
+                await signOut({ redirect: false })
+                toast.success("Logged out successfully")
+                router.push('/')
+            } catch (error) {
+                toast.error("Failed to log out")
+            }
+        }
+        logout()
     }, [])
     return null
 }
