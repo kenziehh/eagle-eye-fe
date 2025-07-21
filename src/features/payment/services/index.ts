@@ -27,3 +27,18 @@ export async function getLatestPaymentStatus() {
     }
     return data
 }
+
+
+export const getCurrentTier = async () => {
+    const { data, error } = await tryCatch(
+        async () => {
+            const response = await api.get('/customers/get-customer-tier')
+            
+            return response.data
+        }
+    )
+    if (error) {
+        throw error
+    }
+    return data
+}

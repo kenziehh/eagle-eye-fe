@@ -1,11 +1,11 @@
 "use client"
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import PricingIcon from '@/assets/images/pricing-icon.png'
 import Image from 'next/image'
 import { Check, X, DollarSign } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
-import { createPayment } from '@/features/payment/services'
+import { createPayment, getCurrentTier } from '@/features/payment/services'
 import { toast } from 'sonner'
 import { useSession } from 'next-auth/react'
 import { useRouter } from 'next/navigation'
@@ -27,7 +27,7 @@ const pricingPlans = [
     {
         id: "basic",
         name: "Basic",
-        price: 3500000,
+        price: "3.500.000",
         description: "Ideal untuk startup dengan kebutuhan sedang.",
         features: [
             { name: "2.500 Verifikasi API / Bulan", included: true },
@@ -41,7 +41,7 @@ const pricingPlans = [
     {
         id: "premium",
         name: "Premium",
-        price: 15000000,
+        price: "15.000.000",
         description: "Solusi lengkap untuk fintech skala besar.",
         features: [
             { name: "15.000 Verifikasi API / Bulan", included: true },
@@ -60,22 +60,38 @@ const pricingPlans = [
 export default function Pricing() {
     const { data: session } = useSession()
     const router = useRouter();
+    const [tier, setTier] = useState<"free" | "basic" | "premium">("free");
     const handleCheckout = async (tierId: string) => {
         try {
             if (!session?.user) {
                 router.push('/auth/login');
-            }
-            const response = await createPayment(tierId);
-            if (response && response.payments && response.payments.snap_url) {
-                window.location.href = response.payments.snap_url;
             } else {
-                toast.error("Payment initiation failed. Please try again.");
+                const response = await createPayment(tierId);
+                if (response && response.payments && response.payments.snap_url) {
+                    window.location.href = response.payments.snap_url;
+                } else {
+                    toast.error("Payment initiation failed. Please try again.");
+                }
             }
+
         } catch (err) {
             console.error("Payment failed:", err);
             alert("Failed to initiate payment. Please try again.");
         }
     };
+
+    useEffect(() => {
+        const fetchCurrentTier = async () => {
+            const response = await getCurrentTier();
+            return response.customers.tier;
+        }
+        if (session?.user) {
+            fetchCurrentTier().then((tier) => {
+                setTier(tier);
+            });
+        }
+    }, [session]);
+
     return (
         <section id='pricing' className='bg-[#3A3368] min-h-screen py-10 md:py-20 flex flex-col gap-8'>
             <div className='flex items-center justify-center flex-col gap-6'>
@@ -114,7 +130,7 @@ export default function Pricing() {
 
                             <div className="pt-6">
                                 <Button
-                                    disabled={!plan.id}
+                                    disabled={!plan.id || (plan.id === "basic" && tier !== "free") || (plan.id === "premium" && tier === "premium")}
                                     className="w-full bg-[#7322F8]/20 hover:bg-[#7322F8] text-white font-medium py-3 rounded-full border border-purple-500"
                                     size="lg"
                                     onClick={() => handleCheckout(plan.id ?? "")}
