@@ -69,3 +69,54 @@ export async function unblockIP(ipAddress: string) {
     }
     return data
 }
+
+export async function getCustomerUsageHourly() {
+    const { data, error } = await tryCatch(
+        async () => {
+            const now = new Date();
+            const dateString = now.toISOString().split('T')[0];
+            const response = await api.get(`/detections/get-customer-usage?mode=hourly&date=${dateString}`)
+            return response.data
+        }
+    )
+
+    if (error instanceof AxiosError && error.response?.data?.message) {
+        throw error.response.data.message;
+    }
+    return data
+
+}
+
+export async function getCustomerUsageMonthly() {
+    const { data, error } = await tryCatch(
+        async () => {
+
+            const response = await api.get(`/detections/get-customer-usage?mode=daily&days=30`)
+            return response.data
+        }
+    )
+
+    if (error instanceof AxiosError && error.response?.data?.message) {
+        throw error.response.data.message;
+    }
+    return data
+
+}
+
+
+export async function getCustomerUsageWeekly() {
+    const { data, error } = await tryCatch(
+        async () => {
+
+            const response = await api.get(`/detections/get-customer-usage?mode=weekly`)
+            return response.data
+        }
+    )
+
+    if (error instanceof AxiosError && error.response?.data?.message) {
+        throw error.response.data.message;
+    }
+    return data
+
+}
+
