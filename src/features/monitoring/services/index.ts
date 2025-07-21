@@ -56,7 +56,7 @@ export async function blockIP(ipAddress: string) {
 export async function unblockIP(ipAddress: string) {
     const { data, error } = await tryCatch(
         async () => {
-            const response = await api.patch(`/detections/unban-ip/${ipAddress}`)
+            const response = await api.patch(`/detections/unban-ip`, { ip: ipAddress })
             return response.data
         }
     )
@@ -76,6 +76,7 @@ export async function getCustomerUsageHourly() {
             const now = new Date();
             const dateString = now.toISOString().split('T')[0];
             const response = await api.get(`/detections/get-customer-usage?mode=hourly&date=${dateString}`)
+            console.log(response.data)
             return response.data
         }
     )
@@ -108,7 +109,7 @@ export async function getCustomerUsageWeekly() {
     const { data, error } = await tryCatch(
         async () => {
 
-            const response = await api.get(`/detections/get-customer-usage?mode=weekly`)
+            const response = await api.get(`/detections/get-customer-usage?mode=daily&days=7`)
             return response.data
         }
     )

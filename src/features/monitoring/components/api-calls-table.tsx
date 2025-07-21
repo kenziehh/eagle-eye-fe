@@ -48,6 +48,9 @@ export function ApiCallsTable({
   const handleBlockIP = async (id: string) => {
     try {
       await blockIP(id)
+      const params = new URLSearchParams(searchParams)
+      router.push(`?${params.toString()}`)
+
       toast.success("IP blocked successfully")
     } catch (error) {
       toast.error(error as unknown as string)
@@ -58,6 +61,9 @@ export function ApiCallsTable({
   const handleUnblockIP = async (id: string) => {
     try {
       await unblockIP(id)
+      const params = new URLSearchParams(searchParams)
+      router.push(`?${params.toString()}`)
+
       toast.success("IP unblocked successfully")
     } catch (error) {
       toast.error(error as unknown as string)
@@ -110,7 +116,7 @@ export function ApiCallsTable({
                   </td>
                   <td className="py-3 px-4">
                     <div className="flex flex-wrap gap-2">
-                      {call.status === "Diterima" ? (
+                      {!call.is_banned ? (
                         <Button
                           size="sm"
                           variant="outline"

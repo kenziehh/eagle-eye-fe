@@ -28,6 +28,7 @@ export interface DetectionItem {
     status: string;
     description: string;
     accessed_at: string;
+    is_banned: boolean;
 }
 
 export interface Detections {

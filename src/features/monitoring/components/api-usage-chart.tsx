@@ -86,7 +86,7 @@ export function ApiUsageChart({ totalCalls, onAddQuota }: ApiUsageChartProps) {
             <SelectContent>
               <SelectItem value="hourly">24 Jam Terakhir</SelectItem>
               <SelectItem value="daily">30 Hari Terakhir</SelectItem>
-              <SelectItem value="weekly">7 Minggu Terakhir</SelectItem>
+              <SelectItem value="weekly">7 Hari Terakhir</SelectItem>
             </SelectContent>
           </Select>
         </CardHeader>
