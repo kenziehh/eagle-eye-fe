@@ -8,6 +8,8 @@ import { Badge } from "@/components/ui/badge"
 import { Search } from "lucide-react"
 import { DetectionItem } from "../types"
 import { useRouter, useSearchParams } from "next/navigation"
+import { blockIP, unblockIP } from "../services"
+import { toast } from "sonner"
 
 interface ApiCallsTableProps {
   title: string
@@ -43,12 +45,24 @@ export function ApiCallsTable({
     router.push(`?${params.toString()}`)
   }
 
-  const handleBlockIP = (ipAddress: string) => {
-    console.log("Blocking IP:", ipAddress)
+  const handleBlockIP = async (id: string) => {
+    try {
+      await blockIP(id)
+      toast.success("IP blocked successfully")
+    } catch (error) {
+      toast.error(error as unknown as string)
+      console.error("Error blocking IP:", error)
+    }
   }
 
-  const handleUnblockIP = (ipAddress: string) => {
-    console.log("Unblocking IP:", ipAddress)
+  const handleUnblockIP = async (id: string) => {
+    try {
+      await unblockIP(id)
+      toast.success("IP unblocked successfully")
+    } catch (error) {
+      toast.error(error as unknown as string)
+      console.error("Error unblocking IP:", error)
+    }
   }
 
   return (
@@ -100,7 +114,7 @@ export function ApiCallsTable({
                         <Button
                           size="sm"
                           variant="outline"
-                          onClick={() => handleBlockIP(call.ip_address)}
+                          onClick={() => handleBlockIP(String(call.ip_address ?? ""))}
                           className="text-xs bg-primary text-white hover:bg-primary-dark"
                         >
                           Block IP
@@ -109,7 +123,7 @@ export function ApiCallsTable({
                         <Button
                           size="sm"
                           variant="outline"
-                          onClick={() => handleUnblockIP(call.ip_address)}
+                          onClick={() => handleUnblockIP(String(call.ip_address ?? ""))}
                           className="text-xs bg-primary text-white hover:bg-primary-dark"
                         >
                           Unblock IP

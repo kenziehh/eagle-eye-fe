@@ -1,6 +1,7 @@
 import { tryCatch } from "@/lib/try-catch"
 import { GetListDetectionResponse } from "../types"
 import { api } from "@/lib/axios"
+import { AxiosError } from "axios"
 
 export async function getListDetection(currentPage: number = 1) {
     const { data, error } = await tryCatch(
@@ -31,6 +32,40 @@ export async function getListDeepfake(currentPage: number = 1) {
 
     if (error) {
         throw new Error(error.message)
+    }
+    return data
+}
+
+export async function blockIP(ipAddress: string) {
+    const { data, error } = await tryCatch(
+        async () => {
+            const response = await api.delete(`/detections/ban-ip/${ipAddress}`)
+            return response.data
+        }
+    )
+
+    if (error) {
+        if (error instanceof AxiosError && error.response?.data?.message) {
+            throw error.response.data.message;
+        }
+        throw "Failed to block IP";
+    }
+    return data
+}
+
+export async function unblockIP(ipAddress: string) {
+    const { data, error } = await tryCatch(
+        async () => {
+            const response = await api.patch(`/detections/unban-ip/${ipAddress}`)
+            return response.data
+        }
+    )
+
+    if (error) {
+        if (error instanceof AxiosError && error.response?.data?.message) {
+            throw error.response.data.message;
+        }
+        throw "Failed to unblock IP";
     }
     return data
 }
