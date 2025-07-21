@@ -2,11 +2,11 @@ import { Lock, Shield, User } from "lucide-react"
 import { SidebarSection } from "../types"
 
 export const sidebarSections: SidebarSection[] = [
-  {
-    title: "PENGENALAN",
-    icon: User,
-    items: [{ name: "Account Overview", href: "/account", id: "account" }],
-  },
+  // {
+  //   title: "PENGENALAN",
+  //   icon: User,
+  //   items: [{ name: "Account Overview", href: "/account", id: "account" }],
+  // },
   {
     title: "VERIFIKASI",
     icon: Shield,
