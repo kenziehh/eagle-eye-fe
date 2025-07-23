@@ -133,7 +133,7 @@ export default function Navbar() {
                 ${isOpen ? "max-h-[400px] opacity-100 mt-4" : "max-h-0 opacity-0"}
             `}
             >
-                <div className="flex flex-col gap-4 px-6 py-4 shadow-md rounded-md bg-white">
+            <div className="flex flex-col gap-4 px-6 py-4 shadow-md rounded-md bg-transparent">
                     {navLinks.map((link) => {
                         const isActive = session?.user && pathname === link.href
                         return (

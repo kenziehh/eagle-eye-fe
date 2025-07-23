@@ -17,7 +17,7 @@ export const metadata: Metadata = {
   title: "Eagle Eye",
   description: "An AI-powered API to detect deepfakes in real time and log every incident securely on the blockchain, ensuring tamper-proof protection for your digital ecosystem.",
   icons:{
-    icon: "/logo.png",
+    icon: "/favicon.ico",
     apple: "/logo.png",
     other: [
       {
