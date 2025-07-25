@@ -14,6 +14,7 @@ import Connect1 from "@/assets/images/connect1.png"
 import { Button } from '@/components/ui/button'
 import { ChevronDown } from 'lucide-react'
 import TypeWriter from '@/components/shared/type-writer'
+import { Link as ScrollLink } from 'react-scroll'
 export default function Hero() {
 
     const [step, setStep] = useState(0);
@@ -39,28 +40,31 @@ export default function Hero() {
                     </div>
                     <p className='text-h3 md:text-h1 max-w-[1100px] text-white/70'>An AI-powered API to detect deepfakes in real time and log every incident securely on the blockchain, ensuring tamper-proof protection for your digital ecosystem.</p>
                 </div>
-                <Button className="bg-gradient-to-r from-[#A626FF] via-[#8C24FB] to-[#7322F8] transition duration-300 flex items-center gap-2">
-                    Get Started
-                    <div className="flex flex-col items-center">
-                        {step === 1 && (
-                            <ChevronDown
-                                className="w-5 h-5 font-bold md:w-7 md:h-7 animate-fade-in"
-                                style={{ animationDelay: "0.1s" }}
-                            />
-                        )}
-                        {step === 2 && (
-                            <>
+                <ScrollLink to='about' smooth={true} duration={500} offset={-150} className='flex justify-center items-center'>
+                    <Button className="bg-gradient-to-r from-[#A626FF] via-[#8C24FB] to-[#7322F8] transition duration-300 flex items-center gap-2">
+                        Get Started
+                        <div className="flex flex-col items-center">
+                            {step === 1 && (
                                 <ChevronDown
-                                    className="w-5 h-5 font-bold md:w-7 md:h-7"
+                                    className="w-5 h-5 font-bold md:w-7 md:h-7 animate-fade-in"
+                                    style={{ animationDelay: "0.1s" }}
                                 />
-                                <ChevronDown
-                                    className="w-5 h-5 font-bold md:w-7 md:h-7 -mt-2.5 animate-fade-in"
-                                    style={{ animationDelay: "0.2s" }}
-                                />
-                            </>
-                        )}
-                    </div>
-                </Button>
+                            )}
+                            {step === 2 && (
+                                <>
+                                    <ChevronDown
+                                        className="w-5 h-5 font-bold md:w-7 md:h-7"
+                                    />
+                                    <ChevronDown
+                                        className="w-5 h-5 font-bold md:w-7 md:h-7 -mt-2.5 animate-fade-in"
+                                        style={{ animationDelay: "0.2s" }}
+                                    />
+                                </>
+                            )}
+                        </div>
+                    </Button>
+                </ScrollLink>
+
 
             </div>
             <div className='flex justify-center items-center py-18 relative'>

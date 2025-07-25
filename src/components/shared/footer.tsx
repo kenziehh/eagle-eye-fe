@@ -1,9 +1,9 @@
-import React from 'react'
+"use client"
 import FooterLogo from "@/assets/images/logo-footer.png"
 import WALogo from "@/assets/images/logo-wa.png"
 
 import Image from 'next/image'
-import Link from 'next/link'
+import { Link as ScrollLink } from 'react-scroll'
 
 export default function Footer() {
     return (
@@ -16,10 +16,18 @@ export default function Footer() {
                 </div>
                 <div className='flex flex-col gap-4 items-start'>
                     <h2>INFORMATION</h2>
-                    <Link href={"/"} className='block text-sm md:text-base'>About Us</Link>
-                    <Link href={"/"} className='block text-sm md:text-base'>How It Works</Link>
-                    <Link href={"/"} className='block text-sm md:text-base'>Pricing</Link>
-                    <Link href={"/"} className='block text-sm md:text-base'>Try Demo</Link>
+                    <ScrollLink to="about" smooth={true} duration={500} offset={-70} className='block text-sm md:text-base cursor-pointer'>
+                        About Us
+                    </ScrollLink>
+                    <ScrollLink to="how-it-works" smooth={true} duration={500} offset={-70} className='block text-sm md:text-base cursor-pointer'>
+                        How It Works
+                    </ScrollLink>
+                    <ScrollLink to="pricing" smooth={true} duration={500} offset={-70} className='block text-sm md:text-base cursor-pointer'>
+                        Pricing
+                    </ScrollLink>
+                    <ScrollLink to="try-demo" smooth={true} duration={500} offset={-70} className='block text-sm md:text-base cursor-pointer'>
+                        Try Demo
+                    </ScrollLink>
                 </div>
                 <div className='flex flex-col gap-4 items-start'>
                     <div className='flex gap-2 items-center'>
