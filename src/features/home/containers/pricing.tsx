@@ -130,14 +130,28 @@ export default function Pricing() {
 
                             <div className="pt-6">
                                 <Button
-                                    disabled={!plan.id || (plan.id === "basic" && tier !== "free") || (plan.id === "premium" && tier === "premium")}
                                     className="w-full bg-[#7322F8]/20 hover:bg-[#7322F8] text-white font-medium py-3 rounded-full border border-purple-500"
                                     size="lg"
-                                    onClick={() => handleCheckout(plan.id ?? "")}
+                                    onClick={() => {
+                                        if (!plan.id) return;
 
+                                        // Jika user sudah premium, atau tidak bisa upgrade, redirect ke /monitoring
+                                        const cannotUpgrade =
+                                            (plan.id === "basic" && tier !== "free") ||
+                                            (plan.id === "premium" && tier === "premium");
+
+                                        if (cannotUpgrade) {
+                                            router.push('/monitoring');
+                                        } else {
+                                            handleCheckout(plan.id);
+                                        }
+                                    }}
                                 >
-                                    Get Started
+                                    {(!plan.id || (plan.id === "basic" && tier !== "free") || (plan.id === "premium" && tier === "premium"))
+                                        ? "Go to Dashboard"
+                                        : "Get Started"}
                                 </Button>
+
                             </div>
                         </CardContent>
                     </Card>
