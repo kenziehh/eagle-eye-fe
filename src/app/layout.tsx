@@ -4,6 +4,7 @@ import "./globals.css";
 import Navbar from "@/components/shared/navbar";
 import Provider from "@/components/layout/provider";
 import { Toaster } from "sonner";
+import { Suspense } from "react";
 
 // Load Google Fonts
 const dmSans = DM_Sans({
@@ -43,7 +44,9 @@ export default function RootLayout({
     <html lang="en">
       <body className={`${dmSans.variable} antialiased`}>
         <Provider >
-          {children}
+          <Suspense fallback={<div></div>}>
+            {children}
+          </Suspense>
         </Provider>
         <Toaster/>
       </body>
