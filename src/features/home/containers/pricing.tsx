@@ -1,5 +1,5 @@
 "use client"
-import React, { useEffect, useState } from 'react'
+import React, { use, useEffect, useState } from 'react'
 import PricingIcon from '@/assets/images/pricing-icon.png'
 import Image from 'next/image'
 import { Check, X, DollarSign } from "lucide-react"
@@ -8,7 +8,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { createPayment, getCurrentTier } from '@/features/payment/services'
 import { toast } from 'sonner'
 import { useSession } from 'next-auth/react'
-import { useRouter } from 'next/navigation'
+import { useRouter, useSearchParams } from 'next/navigation'
 
 const pricingPlans = [
     {
@@ -60,6 +60,8 @@ const pricingPlans = [
 export default function Pricing() {
     const { data: session } = useSession()
     const router = useRouter();
+    const searchParams = useSearchParams();
+    const addQuota = searchParams.get('add_quota');
     const [tier, setTier] = useState<"free" | "basic" | "premium">("free");
     const handleCheckout = async (tierId: string) => {
         try {
@@ -91,6 +93,17 @@ export default function Pricing() {
             });
         }
     }, [session]);
+
+    useEffect(() => {
+        if (addQuota) {
+            const quota = parseInt(addQuota, 10);
+            if (isNaN(quota) || quota <= 0) {
+                toast.error("Invalid quota value. Please enter a valid number.");
+                return;
+            }
+            handleCheckout("basic"); // Redirect to basic plan for quota addition
+        }
+    }, [addQuota]);
 
     return (
         <section id='pricing' className='bg-[#3A3368] min-h-screen py-10 md:py-20 flex flex-col gap-8'>

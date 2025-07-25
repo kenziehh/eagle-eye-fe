@@ -6,6 +6,7 @@ import USBBottom from "@/assets/images/demo-usb-bottom.png"
 import DemoSmartphone from "@/assets/images/demo.png"
 import BackgroundDemo from "@/assets/images/background-demo.png"
 import Image from 'next/image'
+import { Button } from '@/components/ui/button'
 
 export default function Demo() {
     return (
@@ -21,8 +22,13 @@ export default function Demo() {
                     See how EagleEye detects deepfakes and verifies identity with AI and blockchain in just seconds.
                 </p>
                 <div className='flex gap-8 items-center'>
-                    <Image src={PlayStore} alt='Google Play Store' className='' />
-                    <Image src={AppStore} alt='Apple App Store' className='' />
+                    {/* <Image src={PlayStore} alt='Google Play Store' className='' />
+                    <Image src={AppStore} alt='Apple App Store' className='' /> */}
+                    <a rel='noopener noreferrer' target='_blank' href="https://drive.google.com/drive/folders/1xMDMyvm9WfrjVkrYoD_BXdfoHWkqYKQn">
+                       <Button variant="outline" className="bg-transparent py-6 px-8">
+                            Download Demo .apk
+                        </Button>
+                    </a>
                 </div>
                 <div className='relative container flex justify-center items-center mt-10'>
                     <Image src={DemoSmartphone} alt='Demo Smartphone' className='relative z-20' />
