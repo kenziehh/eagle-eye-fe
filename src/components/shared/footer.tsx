@@ -25,6 +25,9 @@ export default function Footer() {
                     <ScrollLink to="pricing" smooth={true} duration={500} offset={-70} className='block text-sm md:text-base cursor-pointer'>
                         Pricing
                     </ScrollLink>
+                    <ScrollLink to="faq" smooth={true} duration={500} offset={-70} className='block text-sm md:text-base cursor-pointer'>
+                        FAQ
+                    </ScrollLink>
                     <ScrollLink to="try-demo" smooth={true} duration={500} offset={-70} className='block text-sm md:text-base cursor-pointer'>
                         Try Demo
                     </ScrollLink>
