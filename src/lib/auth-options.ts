@@ -2,6 +2,11 @@ import { BASE_URL, NEXTAUTH_SECRET } from "@/lib/env";
 import axios from "axios";
 import { NextAuthOptions } from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
+import https from "https";
+
+// Selalu bypass SSL verification (hati-hati di production)
+const httpsAgent = new https.Agent({ rejectUnauthorized: false });
+
 
 export const authOptions: NextAuthOptions = {
     providers: [
@@ -19,7 +24,9 @@ export const authOptions: NextAuthOptions = {
                         headers: {
                             "Content-Type": "application/json",
                             Accept: "application/json",
+                            
                         },
+                        httpsAgent, // bypass SSL
                     });
 
                     const user = response.data?.users;
@@ -34,7 +41,9 @@ export const authOptions: NextAuthOptions = {
 
                     return null;
                 } catch (err) {
+                    console.log(err)
                     if (axios.isAxiosError(err)) {
+                        console.log(err.response?.data);
                         throw new Error(err.response?.data?.message || "Login failed");
                     } else {
                         throw new Error("An unexpected error occurred during login.");

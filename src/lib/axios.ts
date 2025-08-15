@@ -5,6 +5,11 @@ import { redirect } from "next/navigation";
 import { BASE_URL } from "./env";
 import { authOptions } from "./auth-options";
 
+import https from "https";
+
+// Selalu bypass SSL verification (hati-hati di production)
+const httpsAgent = new https.Agent({ rejectUnauthorized: false });
+
 const createInstance = (config?: CreateAxiosDefaults) => {
     const instance = axios.create(config);
 
@@ -33,6 +38,7 @@ const createInstance = (config?: CreateAxiosDefaults) => {
                     config.headers["Content-Type"] = "application/json";
                 }
             }
+            config.httpsAgent = httpsAgent;
 
             return config;
         },
